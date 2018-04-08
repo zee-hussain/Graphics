@@ -5,29 +5,35 @@ class Obstacle{
   Obstacle(){
     radius=random(25,50);
     x=2*width+random(-width,width);
-    y=width/2 + random(-width/2,width/2);
+    y=random(0,height);
   }
-  void collisionAdjust(float otherx,float othery, float r){
-    while(abs(othery-y)<r){
-      if(abs(x-otherx)<4*r){
-        y++;
-      }
-    }
-  }
+  /*void setY(float predeterY){
+    y=predeterY;
+  }*/
   
-  void move(){
+  boolean move(){
     x-=velocity;
     if(x<=-radius){
       radius=random(25,50);
       x=2*width+random(-width,width);
-      y=width/2 + random(-width/2,width/2);
-      velocity+=1;
+      y=random(0,height);
+      velocity+=0.1;
+      return true;
     }
+    return false;
   }
   
-  void display(){
-    move();
-    ellipse(x,y,radius,radius);
+  boolean display(){
+    if(move()){
+      fill(255,0,0);
+      ellipse(x,y,radius,radius);
+      return true;
+    }
+    else{
+      fill(255,0,0);
+      ellipse(x,y,radius,radius);
+      return false;
+    }
   }
   
 }
